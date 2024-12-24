@@ -16,7 +16,9 @@ services:
       - PARSE_SERVER_MASTER_KEY=yourMasterKey
       - PARSE_SERVER_FILE_KEY=optionalFileKey
       - PARSE_SERVER_URL=http://localhost:1337/parse
-      - PARSE_SERVER_MASTER_KEY_IPS=0.0.0.0/0
+      - PARSE_SERVER_MASTER_KEY_IPS=172.18.0.1/24
+      - PARSE_SERVER_JAVASCRIPT_KEY=yourJavaScriptKey
+      - PARSE_SERVER_REST_API_KEY=yourRestApiKey
     depends_on:
       - mongodb
     ports:

@@ -33,8 +33,10 @@ docker compose up -d
 ### Parse Server
 - Application ID: yourAppId
 - Master Key: yourMasterKey
+- JavaScript Key: yourJavaScriptKey
+- REST API Key: yourRestApiKey
 - 資料庫：MongoDB
-- 允許的 Master Key IP: 0.0.0.0/0
+- 允許的 Master Key IP: 172.18.0.1/24
 
 ### Parse Dashboard
 - 已設定允許 HTTP 存取
