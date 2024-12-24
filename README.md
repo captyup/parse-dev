@@ -58,11 +58,10 @@ curl -X POST \
 
 2. 資料驗證 Hooks:
 ```javascript
-// GameScore 的資料驗證範例（需要 Master Key 才能建立新的 Class）
+// GameScore 的資料驗證範例
 curl -X POST \
   -H "X-Parse-Application-Id: yourAppId" \
   -H "X-Parse-REST-API-Key: yourRestApiKey" \
-  -H "X-Parse-Master-Key: yourMasterKey" \
   -H "Content-Type: application/json" \
   -d '{"score":1337,"playerName":"Sean Plott","cheatMode":false}' \
   http://localhost:1337/parse/classes/GameScore

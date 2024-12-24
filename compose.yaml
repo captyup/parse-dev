@@ -20,6 +20,7 @@ services:
       - PARSE_SERVER_JAVASCRIPT_KEY=yourJavaScriptKey
       - PARSE_SERVER_REST_API_KEY=yourRestApiKey
       - PARSE_SERVER_CLOUD=/parse-server/cloud/main.js
+      - PARSE_SERVER_ALLOW_CLIENT_CLASS_CREATION=true
     volumes:
       - ./cloud:/parse-server/cloud
     depends_on:
