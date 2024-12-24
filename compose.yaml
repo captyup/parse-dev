@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  parse-server:
+    image: parseplatform/parse-server:latest
+    container_name: parse-server
+    environment:
+      - PARSE_SERVER_DATABASE_URI=mongodb://mongodb:27017/dev
+      - PARSE_SERVER_APPLICATION_ID=yourAppId
+      - PARSE_SERVER_MASTER_KEY=yourMasterKey
+      - PARSE_SERVER_FILE_KEY=optionalFileKey
+      - PARSE_SERVER_URL=http://localhost:1337/parse
+      - PARSE_SERVER_MASTER_KEY_IPS=172.18.0.1/24
+    depends_on:
+      - mongodb
+    ports:
+      - "1337:1337"
+
+  parse-dashboard:
+    image: parseplatform/parse-dashboard:latest
+    container_name: parse-dashboard
+    environment:
+      - PARSE_DASHBOARD_CONFIG={"apps":[{"appId":"yourAppId","serverURL":"http://localhost:1337/parse","masterKey":"yourMasterKey","appName":"MyApp"}],"users":[{"user":"admin","pass":"admin"}],"trustProxy":1}
+      - PARSE_DASHBOARD_ALLOW_INSECURE_HTTP=1
+    depends_on:
+      - parse-server
+    ports:
+      - "4040:4040"
+
+volumes:
+  mongo_data:
