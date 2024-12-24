@@ -12,6 +12,7 @@
 - MongoDB：資料庫服務
 - Parse Server：後端 API 服務
 - Parse Dashboard：管理介面
+- Cloud Code：自訂後端邏輯
 
 ## 快速開始
 
@@ -42,6 +43,31 @@ docker compose up -d
 - 已設定允許 HTTP 存取
 - 使用統一的設定檔管理應用程式和使用者
 
+### Cloud Code
+Cloud Code 檔案位於 `cloud/main.js`，提供以下功能：
+
+1. Cloud Functions:
+```javascript
+// 呼叫方式
+curl -X POST \
+  -H "X-Parse-Application-Id: yourAppId" \
+  -H "X-Parse-REST-API-Key: yourRestApiKey" \
+  -H "Content-Type: application/json" \
+  http://localhost:1337/parse/functions/hello
+```
+
+2. 資料驗證 Hooks:
+```javascript
+// GameScore 的資料驗證範例（需要 Master Key 才能建立新的 Class）
+curl -X POST \
+  -H "X-Parse-Application-Id: yourAppId" \
+  -H "X-Parse-REST-API-Key: yourRestApiKey" \
+  -H "X-Parse-Master-Key: yourMasterKey" \
+  -H "Content-Type: application/json" \
+  -d '{"score":1337,"playerName":"Sean Plott","cheatMode":false}' \
+  http://localhost:1337/parse/classes/GameScore
+```
+
 ## 注意事項
 
 1. 這是開發環境設定，不建議直接用於生產環境
@@ -50,6 +76,7 @@ docker compose up -d
    - 設定 HTTPS
    - 限制 Master Key 的存取範圍
    - 加強資料庫安全性設定
+   - 使用更安全的 API Keys
 
 ## 常見問題排解
 
@@ -63,3 +90,8 @@ docker compose up -d
 docker compose down -v  # 這會清除所有資料
 docker compose up -d    # 重新啟動服務
 ```
+
+3. 如果 Cloud Code 變更沒有生效：
+   - 確認檔案位置是否正確（`cloud/main.js`）
+   - 重新啟動 Parse Server：`docker compose restart parse-server`
+   - 檢查 Parse Server 日誌：`docker logs parse-server`

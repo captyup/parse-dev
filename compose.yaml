@@ -19,6 +19,9 @@ services:
       - PARSE_SERVER_MASTER_KEY_IPS=172.18.0.1/24
       - PARSE_SERVER_JAVASCRIPT_KEY=yourJavaScriptKey
       - PARSE_SERVER_REST_API_KEY=yourRestApiKey
+      - PARSE_SERVER_CLOUD=/parse-server/cloud/main.js
+    volumes:
+      - ./cloud:/parse-server/cloud
     depends_on:
       - mongodb
     ports:
