@@ -37,7 +37,7 @@ docker compose up -d
 - JavaScript Key: yourJavaScriptKey
 - REST API Key: yourRestApiKey
 - 資料庫：MongoDB
-- 允許的 Master Key IP: 172.18.0.1/24
+- 允許的 Master Key IP: 0.0.0.0/0
 
 ### Parse Dashboard
 - 已設定允許 HTTP 存取
